@@ -1,0 +1,14 @@
+C:\Users\atakm\source\repos\Kalendar\Kalendar\bin\Debug\net8.0\Kalendar.exe
+C:\Users\atakm\source\repos\Kalendar\Kalendar\bin\Debug\net8.0\Kalendar.deps.json
+C:\Users\atakm\source\repos\Kalendar\Kalendar\bin\Debug\net8.0\Kalendar.runtimeconfig.json
+C:\Users\atakm\source\repos\Kalendar\Kalendar\bin\Debug\net8.0\Kalendar.dll
+C:\Users\atakm\source\repos\Kalendar\Kalendar\bin\Debug\net8.0\Kalendar.pdb
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.AssemblyInfoInputs.cache
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.AssemblyInfo.cs
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.csproj.CoreCompileInputs.cache
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.dll
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\refint\Kalendar.dll
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.pdb
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\Kalendar.genruntimeconfig.cache
+C:\Users\atakm\source\repos\Kalendar\Kalendar\obj\Debug\net8.0\ref\Kalendar.dll
