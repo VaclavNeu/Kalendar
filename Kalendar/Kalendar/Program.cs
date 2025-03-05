@@ -31,12 +31,7 @@
             {
                 Console.WriteLine("Zadej cele cislo!");
             }
-            
-            
-            
         }
-        
-
         
     }
 }
