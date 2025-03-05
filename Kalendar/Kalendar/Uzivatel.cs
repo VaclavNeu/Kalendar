@@ -14,7 +14,7 @@ namespace Kalendar
 
         public int UniqId { get; }
         
-        public Uzivatel()
+        public Uzivatel() //Constructor pro automaticke pridavani osob 
         {
            UniqId = globalId++;
         }
@@ -39,7 +39,7 @@ namespace Kalendar
             if (vybrany != null)//Kontrola cisla pri zadavani uzivatele
             {
                 Console.WriteLine($"Kalendar uzivatele {vybrany.Jmeno} {vybrany.Prijmeni}");
-                Operace.ZobrazeniKalendare();
+                Operace.ZobrazeniKalendare(vybrany.UniqId);
             }
             else { Console.WriteLine("Uzivatel nebyl nalezen"); }
 
@@ -69,6 +69,7 @@ namespace Kalendar
             else
             {
                 Console.WriteLine("Neplatný vstup! Zadejte číslo.");
+                ZobrazUzivatele();
             }
 
         }
@@ -76,11 +77,12 @@ namespace Kalendar
         {
 
             Console.Clear();
-            if (index >= 0 && index < uzivatele.Count) 
+            if (index >= 0 && index <= uzivatele.Count) 
             {
-                Uzivatel vybranyUzivatel = uzivatele[index];
+                Uzivatel vybranyUzivatel = uzivatele[index - 1];
                 Console.WriteLine($"Rok:{rok,5} Mesic:{mesic,5} den:{den,5}.\n");
                 Console.WriteLine($"Plany uzivatele{vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni}");
+                Operace.UkladaniDat(rok,mesic,den,index);
             }
             else { Console.WriteLine("Musis si vybrat uzivatele aby ti toto misto bylo pristupne"); }
             

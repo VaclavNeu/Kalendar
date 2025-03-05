@@ -6,32 +6,44 @@
        
         static void Main(string[] args)
         {
-            
-           
 
 
-            Console.WriteLine("Tvuj pocitacovi kalendar");
-            
+            UvodniObrazovka();
 
-            Console.WriteLine("\nVyber akci");
-            Console.WriteLine("\n1. Zobrazit kalendar");
-            Console.WriteLine("2. Zobrazit uzivatele");
-            Console.WriteLine("3. Ukoncit program\n");
            
             
              //Overovani zadanych hodnot pri vyberu
             
 
-            if(int.TryParse(Console.ReadLine(), out int vyberAkce))
+           
+            
+            
+            
+        }
+
+        public static void UvodniObrazovka()
+        {
+            Console.WriteLine("Tvuj pocitacovi kalendar");
+
+
+            Console.WriteLine("\nVyber akci");
+            Console.WriteLine("\n1. Zobrazit kalendar");
+            Console.WriteLine("2. Zobrazit uzivatele");
+            Console.WriteLine("3. Nastaveni");
+            Console.WriteLine("\"Libovolne tlacitko\". Ukoncit program\n");
+
+            if (int.TryParse(Console.ReadLine(), out int vyberAkce))
             {
                 Console.Clear();
                 Operace.Vyber(vyberAkce);
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("Zadej cele cislo!");
+                UvodniObrazovka();
             }
         }
-        
+
     }
 }

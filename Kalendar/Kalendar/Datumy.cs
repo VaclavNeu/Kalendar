@@ -20,28 +20,29 @@ namespace Kalendar
     {
 
 
-        public static void Rok(int rok, int mesic)
+        public static void Rok(int rok, int mesic, int uzivatel)
         {
             if (rok < 2024)
             {
                 Console.WriteLine("Zadal jsi spatny rok");
-
+                Program.UvodniObrazovka();
             }
             else
             {
                 Console.Clear();
-                if (mesic < 13) { 
-                VykresleniKalendare(rok, mesic);
+                if (mesic < 13 && mesic > 0) { 
+                VykresleniKalendare(rok, mesic,uzivatel);
                 }
-                else { Console.WriteLine("Rok ma pouze 12 mesicu!"); Console.ReadLine(); }
+                else { Console.WriteLine("Rok ma pouze 12 mesicu!"); Console.ReadLine(); Program.UvodniObrazovka(); }
 
             }
 
 
         }
 
-            static void VykresleniKalendare(int rok, int mesic)
+            static void VykresleniKalendare(int rok, int mesic, int uzivatel)  // castecna Vypomoc od ChatGPT
             {
+            Console.WriteLine($"{"",20}Planovac uzivatele {uzivatel}");
                 string[] dnyTydne = { "Po", "Ut", "St", "Ct", "Pa", "So", "Ne" };
 
                 // Získání prvního dne v měsíci (1 = Pondělí, 7 = Neděle)
@@ -79,7 +80,7 @@ namespace Kalendar
                 Console.WriteLine("Vyber den, pote stiskni Enter"); 
                 if(int.TryParse(Console.ReadLine(), out int vybranyDen))
                {
-                UzivatelManager.VybiraniDni(rok,mesic,vybranyDen,-1);
+                UzivatelManager.VybiraniDni(rok,mesic,vybranyDen,uzivatel);
                }
 
 
