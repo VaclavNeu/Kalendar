@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|c:\\users\\atakm\\desktop\\c#\\kalendar\\kalendar\\kalendar\\uzivatelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|solutionrelative:kalendar\\uzivatelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|c:\\users\\atakm\\desktop\\c#\\kalendar\\kalendar\\kalendar\\datumy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|solutionrelative:kalendar\\datumy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|c:\\users\\atakm\\desktop\\c#\\kalendar\\kalendar\\kalendar\\operace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|solutionrelative:kalendar\\operace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|c:\\users\\atakm\\desktop\\c#\\kalendar\\kalendar\\kalendar\\uzivatel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|solutionrelative:kalendar\\uzivatel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|c:\\users\\atakm\\desktop\\c#\\kalendar\\kalendar\\kalendar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6513764-8F65-453F-B3E2-6F25989C119D}|Kalendar\\Kalendar.csproj|solutionrelative:kalendar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UzivatelManager.cs",
+              "DocumentMoniker": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\UzivatelManager.cs",
+              "RelativeDocumentMoniker": "Kalendar\\UzivatelManager.cs",
+              "ToolTip": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\UzivatelManager.cs",
+              "RelativeToolTip": "Kalendar\\UzivatelManager.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAAAG4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T11:31:30.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Uzivatel.cs",
+              "DocumentMoniker": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Uzivatel.cs",
+              "RelativeDocumentMoniker": "Kalendar\\Uzivatel.cs",
+              "ToolTip": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Uzivatel.cs",
+              "RelativeToolTip": "Kalendar\\Uzivatel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAABsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T11:43:55.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Datumy.cs",
+              "DocumentMoniker": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Datumy.cs",
+              "RelativeDocumentMoniker": "Kalendar\\Datumy.cs",
+              "ToolTip": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Datumy.cs",
+              "RelativeToolTip": "Kalendar\\Datumy.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T11:51:16.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Operace.cs",
+              "DocumentMoniker": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Operace.cs",
+              "RelativeDocumentMoniker": "Kalendar\\Operace.cs",
+              "ToolTip": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Operace.cs",
+              "RelativeToolTip": "Kalendar\\Operace.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAHkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T11:51:15.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Program.cs",
+              "RelativeDocumentMoniker": "Kalendar\\Program.cs",
+              "ToolTip": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Program.cs",
+              "RelativeToolTip": "Kalendar\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T11:51:14.202Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\atakm\\source\\repos\\Kalendar\\Kalendar\\Kalendar.csproj",
+      "projectUniqueName": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Kalendar.csproj",
       "projectName": "Kalendar",
-      "projectPath": "C:\\Users\\atakm\\source\\repos\\Kalendar\\Kalendar\\Kalendar.csproj",
+      "projectPath": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\Kalendar.csproj",
       "packagesPath": "C:\\Users\\atakm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\atakm\\source\\repos\\Kalendar\\Kalendar\\obj\\",
+      "outputPath": "C:\\Users\\atakm\\Desktop\\C#\\Kalendar\\Kalendar\\Kalendar\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

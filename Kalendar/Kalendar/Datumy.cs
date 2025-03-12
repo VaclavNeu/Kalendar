@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static System.Console;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,16 +24,16 @@ namespace Kalendar
         {
             if (rok < 2024)
             {
-                Console.WriteLine("Zadal jsi spatny rok");
+                WriteLine("Zadal jsi spatny rok");
                 Program.UvodniObrazovka();
             }
             else
             {
-                Console.Clear();
+                Clear();
                 if (mesic < 13 && mesic > 0) { 
                 VykresleniKalendare(rok, mesic,uzivatel);
                 }
-                else { Console.WriteLine("Rok ma pouze 12 mesicu!"); Console.ReadLine(); Program.UvodniObrazovka(); }
+                else { WriteLine("Rok ma pouze 12 mesicu!"); ReadLine(); Program.UvodniObrazovka(); }
 
             }
 
@@ -42,7 +42,7 @@ namespace Kalendar
 
             static void VykresleniKalendare(int rok, int mesic, int uzivatel)  // castecna Vypomoc od ChatGPT
             {
-            Console.WriteLine($"{"",20}Planovac uzivatele {uzivatel}");
+            WriteLine($"{"",20}Planovac uzivatele {uzivatel}");
                 string[] dnyTydne = { "Po", "Ut", "St", "Ct", "Pa", "So", "Ne" };
 
                 // Získání prvního dne v měsíci (1 = Pondělí, 7 = Neděle)
@@ -54,31 +54,31 @@ namespace Kalendar
                 // Výpis názvů dní v týdnu
                 foreach (var den in dnyTydne)
                 {
-                    Console.Write($"{den,7} ");
+                    Write($"{den,7} ");
                 }
-                Console.WriteLine("\n\n");
+                WriteLine("\n\n");
 
                 // Odsazení pro první týden
                 for (int i = 0; i < zacatekDne; i++)
                 {
-                    Console.Write($"   {"",5}"); // Zarovnani aby byl jiz prvni datum pod spravnym dnem
+                    Write($"   {"",5}"); // Zarovnani aby byl jiz prvni datum pod spravnym dnem
 
                 }
                
                 // Výpis dnů měsíce
                 for (int den = 1; den <= pocetDniVMesici; den++)
                 {
-                    Console.Write($"{den,7} "); // Zarovná čísla na dvě místa
+                    Write($"{den,7} "); // Zarovná čísla na dvě místa
 
                     // Přechod na nový řádek vždy po neděli
                     if ((zacatekDne + den) % 7 == 0)
                     {
-                        Console.WriteLine("\n\n");
+                        WriteLine("\n\n");
                     }
                 }
 
-                Console.WriteLine("Vyber den, pote stiskni Enter"); 
-                if(int.TryParse(Console.ReadLine(), out int vybranyDen))
+                WriteLine("Vyber den, pote stiskni Enter"); 
+                if(int.TryParse(ReadLine(), out int vybranyDen))
                {
                 UzivatelManager.VybiraniDni(rok,mesic,vybranyDen,uzivatel);
                }

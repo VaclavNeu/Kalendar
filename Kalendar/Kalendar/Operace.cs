@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static System.Console;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,15 +19,15 @@ namespace Kalendar
                     ZobrazeniKalendare();
                     break;
                 case 2:
-                    UzivatelManager.ZobrazUzivatele();
+                    UzivatelManager.ZobrazUzivatele(0);
                     break;
                 case 3:
-                    
-                    
+
+                    Nastaveni();
                     break;
                 default:
-                    Console.WriteLine("Program ukoncen");
-                    Program.UvodniObrazovka();
+                    WriteLine("Program ukoncen");
+                    ReadLine();
                     break;
 
             }
@@ -36,11 +36,11 @@ namespace Kalendar
 
         public static void ZobrazeniKalendare(int uzivatel = -1) //Zadavani zakladnich hodnot pro spusteni kalendare
         {   // uzivatel je -1 aby mi pri zobrazovani kalendare bez uzivatele fungovalo a nehazelo chyby
-            Console.WriteLine("Zadej rok:                 (Minimalne 2024)");
-           if (int.TryParse(Console.ReadLine(), out int VysledekRok))
+            WriteLine("Zadej rok:                 (Minimalne 2024)");
+           if (int.TryParse(ReadLine(), out int VysledekRok))
             {
-                Console.WriteLine("Zadej mesic: ");
-                if (int.TryParse(Console.ReadLine(), out int VysledekMesic))
+                WriteLine("Zadej mesic: ");
+                if (int.TryParse(ReadLine(), out int VysledekMesic))
                 {
                     Datumy.Rok(VysledekRok, VysledekMesic, uzivatel);
                 }
@@ -56,9 +56,9 @@ namespace Kalendar
         {
             if (File.Exists($"SavedData/{rok}/{mesic}/{den}_{id}.txt")) // Pokud data uz existuji program je vypise
             {
-                Console.WriteLine("Vase poznamky:\n\n");
+                WriteLine("Vase poznamky:\n\n");
                 string vypis = File.ReadAllText($"SavedData/{rok}/{mesic}/{den}_{id}.txt");
-                Console.WriteLine($"\n{vypis}");
+                WriteLine($"\n{vypis}");
             }
             RozhraniDni(rok,mesic,den,id);
             
@@ -66,20 +66,20 @@ namespace Kalendar
 
         public static void RozhraniDni(int rok, int mesic, int den, int id)
         {
-            Console.WriteLine("\nVyberte dalsi akci:\n");
-            Console.WriteLine("1. Pridat data");
-            Console.WriteLine("2. Vratit se na uvodni stranku");
-            Console.WriteLine("3. Vratit se na vyber dni");
-            Console.WriteLine("\"Libovolne tlacitko\". Vypnuti aplikace"); 
+            WriteLine("\nVyberte dalsi akci:\n");
+            WriteLine("1. Pridat data");
+            WriteLine("2. Vratit se na uvodni stranku");
+            WriteLine("3. Vratit se na vyber dni");
+            WriteLine("\"Libovolne tlacitko\". Vypnuti aplikace"); 
 
 
-            if (int.TryParse(Console.ReadLine(), out int vyberAkce))
+            if (int.TryParse(ReadLine(), out int vyberAkce))
             {
                 switch (vyberAkce)
                 {
                     case 1:
-                        Console.WriteLine("Sem napis sve plany");
-                        string str = Console.ReadLine();
+                        WriteLine("Sem napis sve plany");
+                        string str = ReadLine();
                         Directory.CreateDirectory($"SavedData/{rok}/{mesic}");
 
                         File.AppendAllText($"SavedData/{rok}/{mesic}/{den}_{id}.txt", str);
@@ -88,19 +88,51 @@ namespace Kalendar
                         RozhraniDni(rok, mesic, den, id);
                         break;
                     case 2:
-                        Console.Clear();
+                        Clear();
                         Program.UvodniObrazovka();
                         break;
                     case 3:
                         Datumy.Rok(rok, mesic, id);
                         break;
                     default:
-                        Console.WriteLine("Nashledanou!"); // funguje na jakekoliv jine cislo
+                        WriteLine("Nashledanou!"); // funguje na jakekoliv jine cislo
                         break;
                 }
 
             }
-            else { Console.WriteLine("Nashledanou!"); } //kvuli stisku nahodneho tlacitka
+            else { WriteLine("Nashledanou!"); } //kvuli stisku nahodneho tlacitka
+        }
+
+        public static void Nastaveni()
+        {
+            Clear();
+
+            WriteLine("1. Zobrazit uzivatele");
+           
+            WriteLine("2. Tovarni nastaveni");
+            WriteLine("x. Uvodni obrazovka");
+            if (int.TryParse(ReadLine(), out int vyber))
+            {
+                switch (vyber)
+                {
+                    case 1:
+                        Clear();
+                        UzivatelManager.ZobrazUzivatele(1);
+                        WriteLine();
+                      
+                        
+                        break;
+                    
+                    case 2:
+                        
+                        break;
+                    
+                    default:
+                        Program.UvodniObrazovka();
+                        break;
+
+                }
+            }
         }
        
     }

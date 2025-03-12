@@ -1,4 +1,5 @@
-﻿namespace Kalendar
+﻿using static System.Console;  // Abych vsude nemusel psat Console.          kvuli ctivosti kodu
+namespace Kalendar
 {
     internal class Program
     {
@@ -23,24 +24,24 @@
 
         public static void UvodniObrazovka()
         {
-            Console.WriteLine("Tvuj pocitacovi kalendar");
+            WriteLine("Tvuj pocitacovi kalendar");
 
 
-            Console.WriteLine("\nVyber akci");
-            Console.WriteLine("\n1. Zobrazit kalendar");
-            Console.WriteLine("2. Zobrazit uzivatele");
-            Console.WriteLine("3. Nastaveni");
-            Console.WriteLine("\"Libovolne tlacitko\". Ukoncit program\n");
+            WriteLine("\nVyber akci");
+            WriteLine("\n1. Zobrazit kalendar");
+            WriteLine("2. Zobrazit uzivatele");
+            WriteLine("3. Nastaveni");
+            WriteLine("\"Libovolne tlacitko\". Ukoncit program\n");
 
-            if (int.TryParse(Console.ReadLine(), out int vyberAkce))
+            if (int.TryParse(ReadLine(), out int vyberAkce))
             {
-                Console.Clear();
+                Clear();
                 Operace.Vyber(vyberAkce);
             }
             else
             {
-                Console.Clear();
-                Console.WriteLine("Zadej cele cislo!");
+                Clear();
+                WriteLine("Zadej cele cislo!");
                 UvodniObrazovka();
             }
         }
