@@ -22,7 +22,7 @@ namespace Kalendar
 
         public static void Rok(int rok, int mesic, int uzivatel)
         {
-            if (rok < 2024)
+            if (rok < 2024 || rok > 9999) // Osetreni kvuli prilis vysokemu roku
             {
                 WriteLine("Zadal jsi spatny rok");
                 Program.UvodniObrazovka();
@@ -85,6 +85,12 @@ namespace Kalendar
 
 
             }
+        public static void SpatnyRok(int a)
+        {
+            WriteLine("Takovy rok zde neni\nStisknete libovolne tlacitko pro pokracovani");
+            ReadLine();
+            UzivatelManager.DataUzivatele(a);
+        }
         }
     }
 

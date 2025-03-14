@@ -1,9 +1,11 @@
 ﻿using static System.Console;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.Marshalling;
+using System.Runtime.InteropServices;
 
 namespace Kalendar
 {
@@ -12,8 +14,7 @@ namespace Kalendar
         //Ukladani uzivatelu
         static List<Uzivatel> uzivatele = new List<Uzivatel>
             {
-                new Uzivatel {Jmeno = "Vaclav", Prijmeni = "Neuman"},
-                new Uzivatel { Jmeno = "Pepa", Prijmeni = "Depa"}
+                
             };
         public static void UzivatelGUI(int a)
         {
@@ -71,17 +72,34 @@ namespace Kalendar
                             WriteLine("Zadej id uzivatele");
                             if (int.TryParse(ReadLine(), out int id))
                             {
-                                Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == id);
+                                Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == id);  //Kontrola Id
                                 if (vybrany != null)
                                 {
                                     DataUzivatele(id); 
                                 }
-                                else { WriteLine("Uzivatel nebyl nalezen"); }
+                                else { WriteLine("Uzivatel nebyl nalezen\n"); }
                             }
                             else { WriteLine("Vyber platneho uzivatele"); ZobrazUzivatele(1); }
                             break;
                         case 2:
+                            Clear();
+                            string cesta = "SavedData";
+                            List<Uzivatel> uzivatel = NactiUzivatele(cesta);
+                            WriteLine("Zadej jmeno uzivatele: ");
+                            string? jmeno = ReadLine();
+                            WriteLine("Zadej prijmeni uzivatele: ");
+                            string? prijmeni = ReadLine();
+                            if (jmeno != null && prijmeni != null)
+                            {
+                                uzivatel.Add(new Uzivatel(jmeno, prijmeni));
+                                UlozUzivatele(cesta, uzivatel);
+                            }
+                            break;
+
+
                         case 3:
+
+
                         default:
                             Program.UvodniObrazovka();
                             break;
@@ -108,7 +126,28 @@ namespace Kalendar
 
         public static void DataUzivatele(int a) // promenna k urceni Id uzivatele ktereho vypisujem
         {
-            WriteLine("Existuju");
+            Clear();
+            Uzivatel vybranyUzivatel = uzivatele[a - 1];
+            WriteLine($"Data uzivatele: {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni}\n\n"); //Vypsani jmena uzivatele
+
+            Operace.VypisDatUzivatele(a);
+            
+        }
+
+        static void UlozUzivatele(string soubor, List<Uzivatel> uzivatele)
+        {
+            string json = JsonSerializer.Serialize(uzivatele, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(soubor, json);
+        }
+
+        static List<Uzivatel> NactiUzivatele(string soubor)
+        {
+            if (File.Exists(soubor))
+            {
+                string json = File.ReadAllText(soubor);
+                return JsonSerializer.Deserialize<List<Uzivatel>>(json) ?? new List<Uzivatel>();
+            }
+            return new List<Uzivatel>();
         }
     }
 }
