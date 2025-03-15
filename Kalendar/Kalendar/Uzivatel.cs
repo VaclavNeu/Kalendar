@@ -20,10 +20,11 @@ namespace Kalendar
             Prijmeni = prijmeni;
            UniqId = globalId++;
         }
-
+        //Id budu muset predelat kvuli ukladani souboru, editovani uzivatelu bude menit soubory
         ~Uzivatel() 
         {
             WriteLine("Uživatel zrušen");
+            globalId--;
         }
 
     }

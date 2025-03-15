@@ -12,10 +12,8 @@ namespace Kalendar
     static class UzivatelManager
     {
         //Ukladani uzivatelu
-        static List<Uzivatel> uzivatele = new List<Uzivatel>
-            {
-                
-            };
+        static List<Uzivatel> uzivatele = new List<Uzivatel>();
+        
         public static void UzivatelGUI(int a)
         {
             Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == a);
@@ -24,7 +22,7 @@ namespace Kalendar
                 WriteLine($"Kalendar uzivatele {vybrany.Jmeno} {vybrany.Prijmeni}");
                 Operace.ZobrazeniKalendare(vybrany.UniqId);
             }
-            else { WriteLine("Uzivatel nebyl nalezen"); }
+            else { WriteLine("Uzivatel nebyl nalezen"); Program.UvodniObrazovka(); }
 
         }
         public static void ZobrazUzivatele(int a) // Pridal jsem pro int abych si mohl ubrat par radku kodu navic
@@ -82,24 +80,14 @@ namespace Kalendar
                             else { WriteLine("Vyber platneho uzivatele"); ZobrazUzivatele(1); }
                             break;
                         case 2:
-                            Clear();
-                            string cesta = "SavedData";
-                            List<Uzivatel> uzivatel = NactiUzivatele(cesta);
-                            WriteLine("Zadej jmeno uzivatele: ");
-                            string? jmeno = ReadLine();
-                            WriteLine("Zadej prijmeni uzivatele: ");
-                            string? prijmeni = ReadLine();
-                            if (jmeno != null && prijmeni != null)
-                            {
-                                uzivatel.Add(new Uzivatel(jmeno, prijmeni));
-                                UlozUzivatele(cesta, uzivatel);
-                            }
+                            PridavaniUzivatelu();
                             break;
 
 
                         case 3:
 
-
+                            OdebiraniUzivatelu();
+                            break;
                         default:
                             Program.UvodniObrazovka();
                             break;
@@ -134,20 +122,81 @@ namespace Kalendar
             
         }
 
-        static void UlozUzivatele(string soubor, List<Uzivatel> uzivatele)
+        public static void NacitaniUzivatelu()
         {
-            string json = JsonSerializer.Serialize(uzivatele, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(soubor, json);
+            string cesta = "SavedData/Users.txt";
+
+            if (File.Exists(cesta))
+            {
+                string[] radky = File.ReadAllLines(cesta);
+
+                foreach (string radek in radky) 
+                {
+                    string[] data = radek.Split(',');
+                    if(data.Length == 2)
+                    {
+                        uzivatele.Add(new Uzivatel(data[0], data[1]));
+                    }
+                }
+            }
         }
 
-        static List<Uzivatel> NactiUzivatele(string soubor)
+        public static void PridavaniUzivatelu() //Program nejdriv zkontroluje jestli existuje soubor, pote textak
         {
-            if (File.Exists(soubor))
+            Clear();
+            string cesta = "SavedData";
+            if (!Directory.Exists(cesta))
             {
-                string json = File.ReadAllText(soubor);
-                return JsonSerializer.Deserialize<List<Uzivatel>>(json) ?? new List<Uzivatel>();
+                Directory.CreateDirectory(cesta);
             }
-            return new List<Uzivatel>();
+
+            WriteLine("Zadej jmeno uzivatele: ");
+            string? jmeno = ReadLine();
+            WriteLine("Zadej prijmeni uzivatele: ");
+            string? prijmeni = ReadLine();
+            if (jmeno != null && prijmeni != null)  //stringy nesmeji byt null aby byla jmena cela
+            {
+                string UzivateleTextak = "SavedData/Users.txt";
+                if (!File.Exists(UzivateleTextak))
+                {
+                    File.Create(UzivateleTextak);
+                }
+                File.AppendAllText(UzivateleTextak, $"\n{jmeno},{prijmeni}");
+                WriteLine($"Uzivatel {jmeno} {prijmeni} uspesne vytvoren");
+                uzivatele.Add(new Uzivatel(jmeno, prijmeni)); //Aby nedoslo k duplikacim a program rovnou vypsal uzivatele tak je zde jeste hned pridavam
+            }
+            else { WriteLine("Zadali jste neplatne udaje"); }
         }
+
+        public static void OdebiraniUzivatelu()
+        {
+            Clear();
+            string UlozeniUzivatele = "SavedData/Users.txt";
+            if (File.Exists(UlozeniUzivatele))
+            {
+                var uzivateleVypis = uzivatele.Select(x => new Uzivatel(x.Jmeno,x.Prijmeni)).ToList();
+                int i = 1;
+                foreach(var item in uzivateleVypis)
+                {
+                    
+                    WriteLine($"{i}. {item.Jmeno} {item.Prijmeni}");
+                    i++;
+                }
+                WriteLine("Napis id uzivatele ktere chces odstranit");
+                if (int.TryParse(ReadLine(), out int vybranyRadek)) 
+                {
+                    var radky = File.ReadAllLines(UlozeniUzivatele).ToList();
+                    if (vybranyRadek > 0 && vybranyRadek <= radky.Count) 
+                    {
+                        radky.RemoveAt(vybranyRadek - 1);
+                        uzivatele.RemoveAt(vybranyRadek - 1);
+                    }
+                    File.WriteAllLines(UlozeniUzivatele, radky);
+                    
+                }
+            }
+        }
+
+
     }
 }

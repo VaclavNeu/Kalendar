@@ -7,7 +7,7 @@ namespace Kalendar
        
         static void Main(string[] args)
         {
-
+            UzivatelManager.NacitaniUzivatelu(); //pri startu se ihned nactou ulozeni uzivatele
 
             UvodniObrazovka();
 
@@ -24,6 +24,7 @@ namespace Kalendar
 
         public static void UvodniObrazovka()
         {
+            
             WriteLine("Tvuj pocitacovi kalendar");
 
 
