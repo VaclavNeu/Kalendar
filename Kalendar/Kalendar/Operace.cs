@@ -133,9 +133,9 @@ namespace Kalendar
                         if(mazani == "ANO")
                         {
                             Directory.Delete($"SavedData", true); // Vymazeme vse i s vnitrnimi soubory
-                            WriteLine("Data resetovana");
+                            WriteLine("Data resetovana\n\nProgram bude nyni ukoncen!");
                             ReadLine();
-                            Program.UvodniObrazovka();
+                           Environment.Exit(0);
                         }
                         else { 
                             WriteLine("Akce zrusena");
@@ -209,11 +209,11 @@ namespace Kalendar
                                     Program.UvodniObrazovka();
                                     break;
                                 default:
-                                    Program.UkonceniProgramu();
+                                    Environment.Exit(0);
                                     break;
                             }
                         }
-                        else { Program.UkonceniProgramu(); }
+                        else { Environment.Exit(0); }
                     }
                     else { Datumy.SpatnyRok(a); }
                 }

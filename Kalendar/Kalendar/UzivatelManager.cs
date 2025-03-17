@@ -1,11 +1,11 @@
 ﻿using static System.Console;
-using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace Kalendar
 {
@@ -129,13 +129,14 @@ namespace Kalendar
             if (File.Exists(cesta))
             {
                 string[] radky = File.ReadAllLines(cesta);
+                
 
                 foreach (string radek in radky) 
                 {
                     string[] data = radek.Split(',');
-                    if(data.Length == 2)
+                    if(data.Length == 3 && int.TryParse(data[2], out int id))
                     {
-                        uzivatele.Add(new Uzivatel(data[0], data[1]));
+                        uzivatele.Add(new Uzivatel(data[0], data[1], id));
                     }
                 }
             }
@@ -156,43 +157,46 @@ namespace Kalendar
             string? prijmeni = ReadLine();
             if (jmeno != null && prijmeni != null)  //stringy nesmeji byt null aby byla jmena cela
             {
+               
                 string UzivateleTextak = "SavedData/Users.txt";
-                if (!File.Exists(UzivateleTextak))
-                {
-                    File.Create(UzivateleTextak);
-                }
-                File.AppendAllText(UzivateleTextak, $"\n{jmeno},{prijmeni}");
+                List<int> existujiciId = uzivatele.Select(x => x.UniqId).ToList();
+                int noveId = existujiciId.Count > 0 ? existujiciId.Max() + 1 : 1; //Nejvyssi ID + 1
+                File.AppendAllText(UzivateleTextak, $"\n{jmeno.Trim()},{prijmeni.Trim()},{noveId}");
+                
+                
+                uzivatele.Add(new Uzivatel(jmeno, prijmeni, noveId)); //Aby nedoslo k duplikacim a program rovnou vypsal uzivatele tak je zde jeste hned pridavam
                 WriteLine($"Uzivatel {jmeno} {prijmeni} uspesne vytvoren");
-                uzivatele.Add(new Uzivatel(jmeno, prijmeni)); //Aby nedoslo k duplikacim a program rovnou vypsal uzivatele tak je zde jeste hned pridavam
             }
             else { WriteLine("Zadali jste neplatne udaje"); }
         }
 
-        public static void OdebiraniUzivatelu()
+        public static void OdebiraniUzivatelu() //Pridat mazani souboru s uzivatelem
         {
             Clear();
             string UlozeniUzivatele = "SavedData/Users.txt";
             if (File.Exists(UlozeniUzivatele))
             {
-                var uzivateleVypis = uzivatele.Select(x => new Uzivatel(x.Jmeno,x.Prijmeni)).ToList();
-                int i = 1;
-                foreach(var item in uzivateleVypis)
+                var uzivateleVypis = uzivatele.Select(x => new Uzivatel(x.Jmeno, x.Prijmeni, x.UniqId)).ToList();
+                
+                foreach (var item in uzivateleVypis)
                 {
+
+                    WriteLine($"{item.UniqId}. {item.Jmeno} {item.Prijmeni}");
                     
-                    WriteLine($"{i}. {item.Jmeno} {item.Prijmeni}");
-                    i++;
                 }
-                WriteLine("Napis id uzivatele ktere chces odstranit");
-                if (int.TryParse(ReadLine(), out int vybranyRadek)) 
+
+                WriteLine("Napis ID uzivatele, ktereho chces odstranit");
+                if(int.TryParse(ReadLine(), out int id))
                 {
-                    var radky = File.ReadAllLines(UlozeniUzivatele).ToList();
-                    if (vybranyRadek > 0 && vybranyRadek <= radky.Count) 
-                    {
-                        radky.RemoveAt(vybranyRadek - 1);
-                        uzivatele.RemoveAt(vybranyRadek - 1);
-                    }
+                    uzivatele = uzivatele.Where(x => x.UniqId != id).ToList(); //Cteni ID aby byly unikatni i pri zanikani souboru
+                    var radky = File.ReadAllLines(UlozeniUzivatele).Where(radek => !radek.EndsWith($",{id}")).ToList(); //Pomoc od AI
+
                     File.WriteAllLines(UlozeniUzivatele, radky);
-                    
+                    WriteLine($"Uzivatel s ID {id} byl odstranen");
+                }
+                else
+                {
+                    WriteLine("Neplatne ID");
                 }
             }
         }
