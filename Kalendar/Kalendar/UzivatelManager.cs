@@ -134,9 +134,9 @@ namespace Kalendar
                 foreach (string radek in radky) 
                 {
                     string[] data = radek.Split(',');
-                    if(data.Length == 3 && int.TryParse(data[2], out int id))
+                    if(data.Length == 3 && int.TryParse(data[2], out int id)) 
                     {
-                        uzivatele.Add(new Uzivatel(data[0], data[1], id));
+                        uzivatele.Add(new Uzivatel(data[0], data[1], id)); //Vypisovani uzivatelu podle toho jak jsou ulozeni v textaku
                     }
                 }
             }
@@ -193,6 +193,10 @@ namespace Kalendar
 
                     File.WriteAllLines(UlozeniUzivatele, radky);
                     WriteLine($"Uzivatel s ID {id} byl odstranen");
+                    if (Directory.Exists($"SavedData/Uzivatel_{id}")) //Pokud ma uzivatel nejake soubory s jeho ID tak je to smaze
+                    {
+                        Directory.Delete($"SavedData/Uzivatel{id}");
+                    }
                 }
                 else
                 {
