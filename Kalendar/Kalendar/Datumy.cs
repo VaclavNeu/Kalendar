@@ -42,7 +42,11 @@ namespace Kalendar
 
             static void VykresleniKalendare(int rok, int mesic, int uzivatel)  // castecna Vypomoc od ChatGPT
             {
-            WriteLine($"{"",20}Planovac uzivatele {uzivatel}");
+            if (uzivatel == -1) { WriteLine($"{"",20}Planovac uzivatele Host"); } // Pokud si se clovek chce pouze podivat na dny v kalendari, pripoji ho to jako hosta
+            else
+            {
+                WriteLine($"{"",20}Planovac uzivatele {uzivatel}");
+            }
                 string[] dnyTydne = { "Po", "Ut", "St", "Ct", "Pa", "So", "Ne" };
 
                 // Získání prvního dne v měsíci (1 = Pondělí, 7 = Neděle)
@@ -77,11 +81,12 @@ namespace Kalendar
                     }
                 }
 
-                WriteLine("Vyber den, pote stiskni Enter"); 
-                if(int.TryParse(ReadLine(), out int vybranyDen))
-               {
-                UzivatelManager.VybiraniDni(rok,mesic,vybranyDen,uzivatel);
-               }
+                WriteLine($"\n\n\n{"",10}Vyber den, pote stiskni Enter");
+            if (int.TryParse(ReadLine(), out int vybranyDen))
+            {
+                UzivatelManager.VybiraniDni(rok, mesic, vybranyDen, uzivatel);
+            }
+            else { Program.UvodniObrazovka(); }
 
 
             }

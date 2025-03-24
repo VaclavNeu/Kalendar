@@ -107,7 +107,7 @@ namespace Kalendar
                 WriteLine($"Plany uzivatele{vybranyUzivatel.Jmeno } {vybranyUzivatel.Prijmeni}");
                 Operace.UkladaniDat(rok, mesic, den, index);
             }
-            else { WriteLine("Musis si vybrat uzivatele aby ti toto misto bylo pristupne"); Program.UvodniObrazovka(); }
+            else { WriteLine("\nMusis si vybrat uzivatele aby ti toto misto bylo pristupne\n\n"); Program.UvodniObrazovka(); }
 
         }
 
