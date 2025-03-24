@@ -86,7 +86,7 @@ namespace Kalendar
             {
                 UzivatelManager.VybiraniDni(rok, mesic, vybranyDen, uzivatel);
             }
-            else { Program.UvodniObrazovka(); }
+           // else { Program.UvodniObrazovka(); }
 
 
             }

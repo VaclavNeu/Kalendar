@@ -100,13 +100,15 @@ namespace Kalendar
         {
 
             Clear();
-            if (index >= 0 && index <= uzivatele.Count)
+            if (index >= 0) // pridat kontrolu k vetsimu ID ; neni potreba jelikoz nejde zadat vetsi ID
             {
-                Uzivatel vybranyUzivatel = uzivatele[index - 1];
+
+                Uzivatel vybranyUzivatel = uzivatele[index - 2]; // osetreni chyby, kdy mi index z nejakeho duvodu vybira uzivatele s indexem o 2 vice
+                
                 WriteLine($"Rok:{rok,5} Mesic:{mesic,5} den:{den,5}.\n");
-                WriteLine($"Plany uzivatele{vybranyUzivatel.Jmeno } {vybranyUzivatel.Prijmeni}");
+                WriteLine($"Plany uzivatele {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni} {vybranyUzivatel.UniqId};;{index}");
                 Operace.UkladaniDat(rok, mesic, den, index);
-            }
+            } 
             else { WriteLine("\nMusis si vybrat uzivatele aby ti toto misto bylo pristupne\n\n"); Program.UvodniObrazovka(); }
 
         }
@@ -150,7 +152,7 @@ namespace Kalendar
             {
                 Directory.CreateDirectory(cesta);
             }
-
+            File.SetAttributes(cesta, FileAttributes.Hidden);
             WriteLine("Zadej jmeno uzivatele: ");
             string? jmeno = ReadLine();
             WriteLine("Zadej prijmeni uzivatele: ");
