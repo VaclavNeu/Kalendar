@@ -83,7 +83,7 @@ namespace Kalendar
                         string? str = ReadLine();
                         Directory.CreateDirectory($"SavedData/Uzivatel_{id}/{rok}");
 
-                        File.AppendAllText($"SavedData/Uzivatel_{id}/{rok}/{mesic}_{den}.txt", str);
+                        File.AppendAllText($"SavedData/Uzivatel_{id}/{rok}/{mesic}_{den}.txt", "\n" + str);
                         //Soubory se budou ukladat podle danych parametru at jsou jednodusse dohledatelne
 
                         RozhraniDni(rok, mesic, den, id);
@@ -194,7 +194,7 @@ namespace Kalendar
                     if (File.Exists($"SavedData/Uzivatel_{a}/{rok}/{textak}.txt"))
                     {
                        string vypisTextaku = File.ReadAllText($"SavedData/Uzivatel_{a}/{rok}/{textak}.txt");
-                        WriteLine("\n" + vypisTextaku);   //Vypsani textaku
+                        WriteLine("\n" + vypisTextaku + "\n\n");   //Vypsani textaku
 
                         WriteLine($"Zvol dalsi akci\n1. Vratit se na vyber roku\n2. Vratit se na uvodni obrazovku\nx. Ukoncit program");
                        

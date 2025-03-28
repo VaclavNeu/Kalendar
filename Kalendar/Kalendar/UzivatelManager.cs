@@ -1,4 +1,5 @@
 ﻿using static System.Console;
+using System.Text.RegularExpressions; // Pridal jsem tuto tridu abych mohl kontrolovad vklad spravnych znaku
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -153,13 +154,15 @@ namespace Kalendar
                 Directory.CreateDirectory(cesta);
             }
             File.SetAttributes(cesta, FileAttributes.Hidden);
+            WriteLine("Jmena nesmeji obsahovat mezery, nebo specialni znaky\n\n");
             WriteLine("Zadej jmeno uzivatele: ");
             string? jmeno = ReadLine();
             WriteLine("Zadej prijmeni uzivatele: ");
             string? prijmeni = ReadLine();
-            if (jmeno != null && prijmeni != null)  //stringy nesmeji byt null aby byla jmena cela
+            Clear();
+            if (jmeno != null && prijmeni != null && Regex.IsMatch(jmeno, "^[a-zA-Z]+$") && Regex.IsMatch(prijmeni, "^[a-zA-Z]+$"))  //stringy nesmeji byt null aby byla jmena cela
             {
-               
+               // osetreni proti neplatnym udajum
                 string UzivateleTextak = "SavedData/Users.txt";
                 List<int> existujiciId = uzivatele.Select(x => x.UniqId).ToList();
                 int noveId = existujiciId.Count > 0 ? existujiciId.Max() + 1 : 1; //Nejvyssi ID + 1
@@ -169,7 +172,7 @@ namespace Kalendar
                 uzivatele.Add(new Uzivatel(jmeno, prijmeni, noveId)); //Aby nedoslo k duplikacim a program rovnou vypsal uzivatele tak je zde jeste hned pridavam
                 WriteLine($"Uzivatel {jmeno} {prijmeni} uspesne vytvoren");
             }
-            else { WriteLine("Zadali jste neplatne udaje"); }
+            else { WriteLine("Zadali jste neplatne udaje\n\n\n"); }
         }
 
         public static void OdebiraniUzivatelu() //Pridat mazani souboru s uzivatelem
@@ -197,7 +200,7 @@ namespace Kalendar
                     WriteLine($"Uzivatel s ID {id} byl odstranen");
                     if (Directory.Exists($"SavedData/Uzivatel_{id}")) //Pokud ma uzivatel nejake soubory s jeho ID tak je to smaze
                     {
-                        Directory.Delete($"SavedData/Uzivatel{id}");
+                        Directory.Delete($"SavedData/Uzivatel_{id}");
                     }
                 }
                 else
