@@ -46,10 +46,7 @@ namespace Kalendar
                 UvodniObrazovka();
             }
         }
-        public static void UkonceniProgramu()
-        {
-            Environment.Exit(0);
-        }
+   
 
     }
 }
