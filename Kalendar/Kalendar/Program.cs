@@ -1,4 +1,5 @@
-﻿using static System.Console;  // Abych vsude nemusel psat Console.          kvuli ctivosti kodu
+﻿using System.Text;
+using static System.Console;  // Abych vsude nemusel psat Console.          kvuli ctivosti kodu
 namespace Kalendar
 {
     internal class Program
@@ -7,6 +8,8 @@ namespace Kalendar
        
         static void Main(string[] args)
         {
+            OutputEncoding = Encoding.UTF8;
+            InputEncoding = Encoding.UTF8;
             UzivatelManager.NacitaniUzivatelu(); //pri startu se ihned nactou ulozeni uzivatele
 
             UvodniObrazovka();
@@ -25,14 +28,14 @@ namespace Kalendar
         public static void UvodniObrazovka()
         {
             
-            WriteLine("Tvuj pocitacovy kalendar");
+            WriteLine("Tvůj počítačový kalendář");
 
 
             WriteLine("\nVyber akci");
-            WriteLine("\n1. Zobrazit kalendar");
-            WriteLine("2. Zobrazit uzivatele");
-            WriteLine("3. Nastaveni");
-            WriteLine("\"Libovole cislo.\" Ukoncit program\n");
+            WriteLine("\n1. Zobrazit kalendář");
+            WriteLine("2. Zobrazit uživatele");
+            WriteLine("3. Nastavení uživatele");
+            WriteLine("\"Libovolné cislo.\" Ukončit program\n");
 
             if (int.TryParse(ReadLine(), out int vyberAkce))
             {
@@ -42,7 +45,7 @@ namespace Kalendar
             else
             {
                 Clear();
-                WriteLine("Zadej cele cislo!");
+                WriteLine("Zadej celé číslo!");
                 UvodniObrazovka();
             }
         }

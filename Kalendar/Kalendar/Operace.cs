@@ -26,7 +26,7 @@ namespace Kalendar
                     Nastaveni();
                     break;
                 default:
-                    WriteLine("Program ukoncen");
+                    WriteLine("Program ukončen");
                     ReadLine();
                     Environment.Exit(0);
                     break;
@@ -39,10 +39,10 @@ namespace Kalendar
         {   // uzivatel je -1 aby mi pri zobrazovani kalendare bez uzivatele fungovalo a nehazelo chyby
             UzivatelManager.ZobrazovaniUzivatele(uzivatel);
 
-            WriteLine("Zadej rok:                 (Minimalne 2024, Maximalne 9999)");
+            WriteLine("Zadej rok:                 (Minimálně 2024, Maximálně 9999)");
            if (int.TryParse(ReadLine(), out int VysledekRok))
             {
-                WriteLine("Zadej mesic: ");
+                WriteLine("Zadej měsíc: ");
                 if (int.TryParse(ReadLine(), out int VysledekMesic))
                 {
                     Datumy.Rok(VysledekRok, VysledekMesic, uzivatel);
@@ -59,9 +59,9 @@ namespace Kalendar
         {
             if (File.Exists($"SavedData/Uzivatel_{id}/{rok}/{mesic}_{den}.txt")) // Pokud data uz existuji program je vypise
             {
-                WriteLine("Vase poznamky:\n\n");
+                WriteLine("Vaše poznámky:\n\n");
                 string vypis = File.ReadAllText($"SavedData/Uzivatel_{id}/{rok}/{mesic}_{den}.txt");
-                WriteLine($"\n{vypis}\n\nStiskni libovolne tlacitko pro pokracovani.");
+                WriteLine($"\n{vypis}\n\nStiskni libovolné tlačítko pro pokračovaní.");
                 ReadLine();
             }
             RozhraniDni(rok,mesic,den,id);
@@ -71,14 +71,14 @@ namespace Kalendar
         public static void RozhraniDni(int rok, int mesic, int den, int id) //Zde se clovek rozhodne zda li chce dalsi data pridat nebo ne
         {
             Clear();
-            WriteLine($"Rok:{rok,5} Mesic:{mesic,5} den:{den,5}.\n");
+            WriteLine($"Rok:{rok,5} Měsíc:{mesic,5} den:{den,5}.\n");
             UzivatelManager.ZobrazovaniUzivatele(id);
 
-            WriteLine("\nVyberte dalsi akci:\n");
-            WriteLine("1. Pridat data");
-            WriteLine("2. Vratit se na uvodni stranku");
-            WriteLine("3. Vratit se na vyber dni");
-            WriteLine("\"Libovolne tlacitko\". Vypnuti aplikace"); 
+            WriteLine("\nVyberte další akci:\n");
+            WriteLine("1. Přidat data");
+            WriteLine("2. Vrátit se na úvodní stránku");
+            WriteLine("3. Vrátit se na výběr dní");
+            WriteLine("\"Libovolné tlačítko\". Vypnutí aplikace"); 
 
 
             if (int.TryParse(ReadLine(), out int vyberAkce))
@@ -86,7 +86,7 @@ namespace Kalendar
                 switch (vyberAkce)
                 {
                     case 1:
-                        WriteLine("Sem napis sve plany");
+                        WriteLine("Sem napiš své plány");
                         string? str = ReadLine();
                         Directory.CreateDirectory($"SavedData/Uzivatel_{id}/{rok}");
 
@@ -118,9 +118,9 @@ namespace Kalendar
         {
             Clear();
             
-            WriteLine("1. Zobrazit uzivatele");
+            WriteLine("1. Zobrazit uživatele");
            
-            WriteLine("2. Tovarni nastaveni");
+            WriteLine("2. Tovární nastavení");
             WriteLine("\"Libovolne tlacitko\". Uvodni obrazovka");
             if (int.TryParse(ReadLine(), out int vyber))
             {
@@ -135,17 +135,17 @@ namespace Kalendar
                         break;
                     
                     case 2:
-                        WriteLine($"Opravdu chcete vymazat vsechna data?\nPokud ano, napiste \"ANO\"");
+                        WriteLine($"Opravdu chcete vymazat všechna data?\nPokud ano, napiste \"ANO\"");
                         string? mazani = ReadLine();
                         if(mazani == "ANO")
                         {
                             Directory.Delete($"SavedData", true); // Vymazeme vse i s vnitrnimi soubory
-                            WriteLine("Data resetovana\n\nProgram bude nyni ukoncen!");
+                            WriteLine("Data resetovana\n\nProgram bude nyní ukončen!");
                             ReadLine();
                            Environment.Exit(0);
                         }
                         else { 
-                            WriteLine("Akce zrusena");
+                            WriteLine("Akce zrušena");
                             ReadLine();
                             Program.UvodniObrazovka();
                         }
@@ -161,7 +161,7 @@ namespace Kalendar
             if (Directory.Exists(VypisDat)) // Ověří, zda složka existuje
             {
                 string[] nalezeneSlozky = Directory.GetDirectories(VypisDat);
-                WriteLine("\n\nVyber si rok o kterem chces informace\n");
+                WriteLine("\n\nVyber si rok o kterém chceš informace\n");
                 foreach (string slozka in nalezeneSlozky)
                 {
                     string posledniCislo = Path.GetFileName(slozka); // Získá poslední část cesty
@@ -174,7 +174,7 @@ namespace Kalendar
             }
             else
             {
-                WriteLine("Uzivatel nema zadne slozky!\n\n");
+                WriteLine("Uživatel nemá žádné složky!\n\n");
             }
         }
 
@@ -192,14 +192,14 @@ namespace Kalendar
                         string pouzeMesic = Path.GetFileNameWithoutExtension(mesic); //Vypsani souboru bez pripon
                         WriteLine(pouzeMesic);
                     }
-                    WriteLine("\nVyber si datum ktere chces zobrazit");
+                    WriteLine("\nVyber si datum které chceš zobrazit");
                     string? textak = ReadLine();
                     if (File.Exists($"SavedData/Uzivatel_{a}/{rok}/{textak}.txt"))
                     {
                        string vypisTextaku = File.ReadAllText($"SavedData/Uzivatel_{a}/{rok}/{textak}.txt");
                         WriteLine("\n" + vypisTextaku + "\n\n");   //Vypsani textaku
 
-                        WriteLine($"Zvol dalsi akci\n1. Vratit se na vyber roku\n2. Vratit se na uvodni obrazovku\nx. Ukoncit program");
+                        WriteLine($"Zvol další akci\n1. Vrátit se na výběr roku\n2. Vrátit se na úvodní obrazovku\nx. Ukončit program");
                        
                         if(int.TryParse(ReadLine(), out int vyber))
                         {

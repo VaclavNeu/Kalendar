@@ -26,7 +26,7 @@ namespace Kalendar
             UzivatelManager.ZobrazovaniUzivatele(uzivatel);
             if (rok < 2024 || rok > 9999) // Osetreni kvuli prilis vysokemu roku
             {
-                WriteLine("Zadal jsi spatny rok");
+                WriteLine("Zadal jsi špatný rok");
                 Program.UvodniObrazovka();
             }
             else
@@ -35,7 +35,7 @@ namespace Kalendar
                 if (mesic < 13 && mesic > 0) { 
                 VykresleniKalendare(rok, mesic,uzivatel);
                 }
-                else { WriteLine("Rok ma pouze 12 mesicu!"); ReadLine(); Program.UvodniObrazovka(); }
+                else { WriteLine("Rok má pouze 12 měsíců!"); ReadLine(); Program.UvodniObrazovka(); }
 
             }
 

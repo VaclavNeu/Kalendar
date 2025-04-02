@@ -21,10 +21,10 @@ namespace Kalendar
             Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == a);
             if (vybrany != null)//Kontrola cisla pri zadavani uzivatele
             {
-                WriteLine($"Kalendar uzivatele {vybrany.Jmeno} {vybrany.Prijmeni}");
+                WriteLine($"Kalendář uživatele {vybrany.Jmeno} {vybrany.Prijmeni}");
                 Operace.ZobrazeniKalendare(vybrany.UniqId);
             }
-            else { WriteLine("Uzivatel nebyl nalezen"); Program.UvodniObrazovka(); }
+            else { WriteLine("Uživatel nebyl nalezen"); Program.UvodniObrazovka(); }
 
         }
         public static void ZobrazUzivatele(int a) // Pridal jsem pro int abych si mohl ubrat par radku kodu navic
@@ -47,7 +47,7 @@ namespace Kalendar
            
             if (a != 1)
             {
-                Write("Zadejte ID uzivatele: ");
+                Write("Zadejte ID uživatele: ");
                 if (int.TryParse(ReadLine(), out int id))
                 {
                     Clear();
@@ -62,9 +62,9 @@ namespace Kalendar
             else
             {
                 WriteLine("\n\n\n1. Vyber uzivatele podle Id");
-                WriteLine("2. Pridej uzivatele");
-                WriteLine("3. Odstran uzivatele");
-                WriteLine("\"Libovolne tlacitko\". Uvodni obrazovka");
+                WriteLine("2. Přidej uživatele");
+                WriteLine("3. Odstraň uživatele");
+                WriteLine("\"Libovolné tlačítko\". Úvodní obrazovka");
                 if (int.TryParse(ReadLine(), out int vyber))
                 {
                     switch (vyber) 
@@ -80,7 +80,7 @@ namespace Kalendar
                                 }
                                 else { WriteLine("Uzivatel nebyl nalezen\n"); }
                             }
-                            else { WriteLine("Vyber platneho uzivatele"); ZobrazUzivatele(1); }
+                            else { WriteLine("Vyber platného uživatele"); ZobrazUzivatele(1); }
                             break;
                         case 2:
                             PridavaniUzivatelu();
@@ -112,7 +112,7 @@ namespace Kalendar
                 
                 Operace.UkladaniDat(rok, mesic, den, index);
             } 
-            else { WriteLine("\nMusis si vybrat uzivatele aby ti toto misto bylo pristupne\n\n"); Program.UvodniObrazovka(); }
+            else { WriteLine("\nMusíš si vybrat uživatele aby ti toto místo bylo přístupné\n\n"); Program.UvodniObrazovka(); }
 
         }
 
@@ -121,7 +121,7 @@ namespace Kalendar
         {
             Clear();
             Uzivatel vybranyUzivatel = uzivatele[a - 1];
-            WriteLine($"Data uzivatele: {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni}\n\n"); //Vypsani jmena uzivatele
+            WriteLine($"Data uživatele: {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni}\n\n"); //Vypsani jmena uzivatele
 
             Operace.VypisDatUzivatele(a);
             
@@ -156,25 +156,28 @@ namespace Kalendar
                 Directory.CreateDirectory(cesta);
             }
             File.SetAttributes(cesta, FileAttributes.Hidden);
-            WriteLine("Jmena nesmeji obsahovat mezery, nebo specialni znaky\n\n");
-            WriteLine("Zadej jmeno uzivatele: ");
+            WriteLine("Jména nesmějí obsahovat mezery, nebo speciální znaky\n\n");
+            WriteLine("Zadej jméno uživatele: ");
             string? jmeno = ReadLine();
-            WriteLine("Zadej prijmeni uzivatele: ");
+            WriteLine("Zadej příjmení uživatele: ");
             string? prijmeni = ReadLine();
             Clear();
-            if (jmeno != null && prijmeni != null && Regex.IsMatch(jmeno, "^[a-zA-Z]+$") && Regex.IsMatch(prijmeni, "^[a-zA-Z]+$"))  //stringy nesmeji byt null aby byla jmena cela
+            if (jmeno != null && prijmeni != null && Regex.IsMatch(jmeno, "^[a-zA-Zá-žÁ-Ž]+$") && Regex.IsMatch(prijmeni, "^[a-zA-Zá-žÁ-Ž]+$"))  //stringy nesmeji byt null aby byla jmena cela
             {
                // osetreni proti neplatnym udajum
                 string UzivateleTextak = "SavedData/Users.txt";
                 List<int> existujiciId = uzivatele.Select(x => x.UniqId).ToList();
                 int noveId = existujiciId.Count > 0 ? existujiciId.Max() + 1 : 1; //Nejvyssi ID + 1
                 File.AppendAllText(UzivateleTextak, $"\n{jmeno.Trim()},{prijmeni.Trim()},{noveId}");
+                WriteLine($"Uživatel {jmeno} {prijmeni} úspěšně vytvořen");
+
                 
-                
+
                 uzivatele.Add(new Uzivatel(jmeno, prijmeni, noveId)); //Aby nedoslo k duplikacim a program rovnou vypsal uzivatele tak je zde jeste hned pridavam
-                WriteLine($"Uzivatel {jmeno} {prijmeni} uspesne vytvoren");
+                
             }
-            else { WriteLine("Zadali jste neplatne udaje\n\n\n"); }
+            else { WriteLine("Zadali jste neplatné údaje\n\n\n"); }
+            ReadLine();
         }
 
         public static void OdebiraniUzivatelu() //Pridat mazani souboru s uzivatelem
@@ -192,14 +195,14 @@ namespace Kalendar
                     
                 }
 
-                WriteLine("Napis ID uzivatele, ktereho chces odstranit");
+                WriteLine("Napiš ID uživatele, kterého chceš odstranit");
                 if(int.TryParse(ReadLine(), out int id))
                 {
                     uzivatele = uzivatele.Where(x => x.UniqId != id).ToList(); //Cteni ID aby byly unikatni i pri zanikani souboru
                     var radky = File.ReadAllLines(UlozeniUzivatele).Where(radek => !radek.EndsWith($",{id}")).ToList(); //Pomoc od AI
 
                     File.WriteAllLines(UlozeniUzivatele, radky);
-                    WriteLine($"Uzivatel s ID {id} byl odstranen");
+                    WriteLine($"Uživatel s ID {id} byl odstraněn");
                     if (Directory.Exists($"SavedData/Uzivatel_{id}")) //Pokud ma uzivatel nejake soubory s jeho ID tak je to smaze
                     {
                         Directory.Delete($"SavedData/Uzivatel_{id}");
@@ -207,7 +210,7 @@ namespace Kalendar
                 }
                 else
                 {
-                    WriteLine("Neplatne ID");
+                    WriteLine("Neplatné ID");
                 }
             }
             
@@ -217,9 +220,9 @@ namespace Kalendar
             Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == idU);
             if (vybrany != null)
             {
-                WriteLine($"Uzivatel: {vybrany.Jmeno}  {vybrany.Prijmeni} ID: {vybrany.UniqId}");
+                WriteLine($"Uživatel: {vybrany.Jmeno}  {vybrany.Prijmeni} ID: {vybrany.UniqId}");
             }
-            else { WriteLine("Uzivatel: Host"); }
+            else { WriteLine("Uživatel: Host"); }
             WriteLine();
         }
 
