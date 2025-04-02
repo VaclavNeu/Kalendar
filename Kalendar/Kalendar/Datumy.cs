@@ -19,9 +19,11 @@ namespace Kalendar
     internal class Datumy
     {
 
-
+        
+        
         public static void Rok(int rok, int mesic, int uzivatel)
         {
+            UzivatelManager.ZobrazovaniUzivatele(uzivatel);
             if (rok < 2024 || rok > 9999) // Osetreni kvuli prilis vysokemu roku
             {
                 WriteLine("Zadal jsi spatny rok");
@@ -42,11 +44,7 @@ namespace Kalendar
 
             static void VykresleniKalendare(int rok, int mesic, int uzivatel)  // castecna Vypomoc od ChatGPT
             {
-            if (uzivatel == -1) { WriteLine($"{"",20}Planovac uzivatele Host"); } // Pokud si se clovek chce pouze podivat na dny v kalendari, pripoji ho to jako hosta
-            else
-            {
-                WriteLine($"{"",20}Planovac uzivatele {uzivatel}");
-            }
+            UzivatelManager.ZobrazovaniUzivatele(uzivatel);
                 string[] dnyTydne = { "Po", "Ut", "St", "Ct", "Pa", "So", "Ne" };
 
                 // Získání prvního dne v měsíci (1 = Pondělí, 7 = Neděle)

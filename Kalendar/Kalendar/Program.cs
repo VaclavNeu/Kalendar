@@ -25,14 +25,14 @@ namespace Kalendar
         public static void UvodniObrazovka()
         {
             
-            WriteLine("Tvuj pocitacovi kalendar");
+            WriteLine("Tvuj pocitacovy kalendar");
 
 
             WriteLine("\nVyber akci");
             WriteLine("\n1. Zobrazit kalendar");
             WriteLine("2. Zobrazit uzivatele");
             WriteLine("3. Nastaveni");
-            WriteLine("\"Libovolne tlacitko\". Ukoncit program\n");
+            WriteLine("\"Libovole cislo.\" Ukoncit program\n");
 
             if (int.TryParse(ReadLine(), out int vyberAkce))
             {

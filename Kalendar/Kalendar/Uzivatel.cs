@@ -12,7 +12,7 @@ namespace Kalendar
         public string Jmeno { get; set; }
         public string Prijmeni { get; set; }
 
-        public int UniqId { get; }
+        public int UniqId { get; set; }
         
         public Uzivatel(string jmeno, string prijmeni,int Id) //Constructor pro automaticke pridavani osob 
         {

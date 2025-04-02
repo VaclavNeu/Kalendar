@@ -37,6 +37,8 @@ namespace Kalendar
 
         public static void ZobrazeniKalendare(int uzivatel = -1) //Zadavani zakladnich hodnot pro spusteni kalendare
         {   // uzivatel je -1 aby mi pri zobrazovani kalendare bez uzivatele fungovalo a nehazelo chyby
+            UzivatelManager.ZobrazovaniUzivatele(uzivatel);
+
             WriteLine("Zadej rok:                 (Minimalne 2024, Maximalne 9999)");
            if (int.TryParse(ReadLine(), out int VysledekRok))
             {
@@ -59,7 +61,8 @@ namespace Kalendar
             {
                 WriteLine("Vase poznamky:\n\n");
                 string vypis = File.ReadAllText($"SavedData/Uzivatel_{id}/{rok}/{mesic}_{den}.txt");
-                WriteLine($"\n{vypis}");
+                WriteLine($"\n{vypis}\n\nStiskni libovolne tlacitko pro pokracovani.");
+                ReadLine();
             }
             RozhraniDni(rok,mesic,den,id);
             
@@ -67,6 +70,10 @@ namespace Kalendar
 
         public static void RozhraniDni(int rok, int mesic, int den, int id) //Zde se clovek rozhodne zda li chce dalsi data pridat nebo ne
         {
+            Clear();
+            WriteLine($"Rok:{rok,5} Mesic:{mesic,5} den:{den,5}.\n");
+            UzivatelManager.ZobrazovaniUzivatele(id);
+
             WriteLine("\nVyberte dalsi akci:\n");
             WriteLine("1. Pridat data");
             WriteLine("2. Vratit se na uvodni stranku");
@@ -86,7 +93,7 @@ namespace Kalendar
                         File.AppendAllText($"SavedData/Uzivatel_{id}/{rok}/{mesic}_{den}.txt", "\n" + str);
                         //Soubory se budou ukladat podle danych parametru at jsou jednodusse dohledatelne
 
-                        RozhraniDni(rok, mesic, den, id);
+                        UkladaniDat(rok, mesic, den, id);
                         break;
                     case 2:
                         Clear();
@@ -114,7 +121,7 @@ namespace Kalendar
             WriteLine("1. Zobrazit uzivatele");
            
             WriteLine("2. Tovarni nastaveni");
-            WriteLine("x. Uvodni obrazovka");
+            WriteLine("\"Libovolne tlacitko\". Uvodni obrazovka");
             if (int.TryParse(ReadLine(), out int vyber))
             {
                 switch (vyber)
@@ -143,12 +150,8 @@ namespace Kalendar
                             Program.UvodniObrazovka();
                         }
                         break;
-                    
-                    default:
-                        Program.UvodniObrazovka();
-                        break;
 
-                }
+                }Program.UvodniObrazovka();
             }
         }
        public static void VypisDatUzivatele(int a) // a = index uzivatele

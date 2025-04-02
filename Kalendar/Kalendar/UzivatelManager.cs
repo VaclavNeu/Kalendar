@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Kalendar
 {
@@ -63,7 +64,8 @@ namespace Kalendar
                 WriteLine("\n\n\n1. Vyber uzivatele podle Id");
                 WriteLine("2. Pridej uzivatele");
                 WriteLine("3. Odstran uzivatele");
-                if(int.TryParse(ReadLine(), out int vyber))
+                WriteLine("\"Libovolne tlacitko\". Uvodni obrazovka");
+                if (int.TryParse(ReadLine(), out int vyber))
                 {
                     switch (vyber) 
                     {
@@ -89,12 +91,12 @@ namespace Kalendar
 
                             OdebiraniUzivatelu();
                             break;
-                        default:
-                            Program.UvodniObrazovka();
-                            break;
+                        
                     }
-                    Program.UvodniObrazovka();
+                    Clear();
+                  
                 }
+                Clear();
             }
         }
         public static void VybiraniDni(int rok, int mesic, int den, int index) //Vybirani dni v kalendari
@@ -104,10 +106,10 @@ namespace Kalendar
             if (index >= 0) // pridat kontrolu k vetsimu ID ; neni potreba jelikoz nejde zadat vetsi ID
             {
 
-                Uzivatel vybranyUzivatel = uzivatele[index - 2]; // osetreni chyby, kdy mi index z nejakeho duvodu vybira uzivatele s indexem o 2 vice
+                Uzivatel vybranyUzivatel = uzivatele[index - 1]; // osetreni chyby, kdy mi index z nejakeho duvodu vybira uzivatele s indexem o 2 vice
                 
-                WriteLine($"Rok:{rok,5} Mesic:{mesic,5} den:{den,5}.\n");
-                WriteLine($"Plany uzivatele {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni} {vybranyUzivatel.UniqId};;{index}");
+                
+                
                 Operace.UkladaniDat(rok, mesic, den, index);
             } 
             else { WriteLine("\nMusis si vybrat uzivatele aby ti toto misto bylo pristupne\n\n"); Program.UvodniObrazovka(); }
@@ -208,6 +210,17 @@ namespace Kalendar
                     WriteLine("Neplatne ID");
                 }
             }
+            
+        }
+        public static void ZobrazovaniUzivatele(int idU)
+        {
+            Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == idU);
+            if (vybrany != null)
+            {
+                WriteLine($"Uzivatel: {vybrany.Jmeno}  {vybrany.Prijmeni} ID: {vybrany.UniqId}");
+            }
+            else { WriteLine("Uzivatel: Host"); }
+            WriteLine();
         }
 
 
