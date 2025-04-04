@@ -2,3 +2,5 @@
 TEST,IDCEK,2
 
 Vasa,sasa,3
+Jsem,Pepa,4
+Amor,Vanos,5

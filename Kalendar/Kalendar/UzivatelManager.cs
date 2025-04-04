@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.InteropServices;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using System;
 
 namespace Kalendar
 {
@@ -78,7 +79,7 @@ namespace Kalendar
                                 {
                                     DataUzivatele(id); 
                                 }
-                                else { WriteLine("Uzivatel nebyl nalezen\n"); }
+                                else { Clear(); WriteLine("Uživatel nebyl nalezen\n"); ReadLine(); }
                             }
                             else { WriteLine("Vyber platného uživatele"); ZobrazUzivatele(1); }
                             break;
@@ -106,10 +107,10 @@ namespace Kalendar
             if (index >= 0) // pridat kontrolu k vetsimu ID ; neni potreba jelikoz nejde zadat vetsi ID
             {
 
-                Uzivatel vybranyUzivatel = uzivatele[index - 1]; // osetreni chyby, kdy mi index z nejakeho duvodu vybira uzivatele s indexem o 2 vice
-                
-                
-                
+                Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == index); // Predtim program ukladal data do Pole, tak jsem to zmenil ne vyhledavani podle ID
+
+
+
                 Operace.UkladaniDat(rok, mesic, den, index);
             } 
             else { WriteLine("\nMusíš si vybrat uživatele aby ti toto místo bylo přístupné\n\n"); Program.UvodniObrazovka(); }
@@ -120,10 +121,14 @@ namespace Kalendar
         public static void DataUzivatele(int a) // promenna k urceni Id uzivatele ktereho vypisujem
         {
             Clear();
-            Uzivatel vybranyUzivatel = uzivatele[a - 1];
-            WriteLine($"Data uživatele: {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni}\n\n"); //Vypsani jmena uzivatele
+            Uzivatel? vybranyUzivatel = uzivatele.FirstOrDefault(u => u.UniqId == a);
+            if (vybranyUzivatel != null)
+            {
+                WriteLine($"Data uživatele: {vybranyUzivatel.Jmeno} {vybranyUzivatel.Prijmeni}\n\n"); //Vypsani jmena uzivatele
 
-            Operace.VypisDatUzivatele(a);
+                Operace.VypisDatUzivatele(a);
+            }
+            else { Clear();  WriteLine("Daný uživatel neexistuje"); ReadLine(); }
             
         }
 
