@@ -203,20 +203,30 @@ namespace Kalendar
                 WriteLine("Napiš ID uživatele, kterého chceš odstranit");
                 if(int.TryParse(ReadLine(), out int id))
                 {
+                    Uzivatel? vybrany = uzivatele.FirstOrDefault(u => u.UniqId == id);
                     uzivatele = uzivatele.Where(x => x.UniqId != id).ToList(); //Cteni ID aby byly unikatni i pri zanikani souboru
-                    var radky = File.ReadAllLines(UlozeniUzivatele).Where(radek => !radek.EndsWith($",{id}")).ToList(); //Pomoc od AI
+                    if (vybrany != null)
+                    {
+                        var radky = File.ReadAllLines(UlozeniUzivatele).Where(radek => !radek.EndsWith($",{id}")).ToList(); //Pomoc od AI
 
-                    File.WriteAllLines(UlozeniUzivatele, radky);
-                    WriteLine($"Uživatel s ID {id} byl odstraněn");
+                        File.WriteAllLines(UlozeniUzivatele, radky);
+                        Clear();
+                        WriteLine($"Uživatel s ID {id} byl odstraněn");
+                        ReadLine();
+                    }
+                    else
+                    {
+                        Clear();
+                        WriteLine("Neplatné ID");
+                        ReadLine();
+                    }
                     if (Directory.Exists($"SavedData/Uzivatel_{id}")) //Pokud ma uzivatel nejake soubory s jeho ID tak je to smaze
                     {
                         Directory.Delete($"SavedData/Uzivatel_{id}");
                     }
                 }
-                else
-                {
-                    WriteLine("Neplatné ID");
-                }
+                else { Clear(); WriteLine("Mel si zadat cislo");ReadLine(); }
+                
             }
             
         }
